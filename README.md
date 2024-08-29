@@ -8,7 +8,9 @@ You can install dependencies using pip:
 
 Download the Duke Breast Dataset with the option descriptive paths and add the path to the file `utils\constants.py` on **MANIFEST_FILE**.
 
-Then run the script `build_dataset.py` to nuild the dataset.csv with all the image path information and IAP.
+Then run the script `build_dataset.py` to build the dataset.csv with all the image path information and IAP.
+
+Larger files including some pre-trained model weights, the folder containing the segmented images and some datasets containing the IAP information can be found in [here](https://zenodo.org/records/13495922) After unzipping the file the 5 folders should be moved to the root directory of the repository.
 
 ## File Paths
 Paths are defined in `utils\constants.py` that may need to be changed.
