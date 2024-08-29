@@ -92,7 +92,7 @@ for (steps, gs) in test_params:
                                                 'dropout':0,
                                                 'norm':Norm.BATCH},
                                 optimizer_name='Adam',
-                                optimizer_hparams={'lr':5e-3,
+                                optimizer_hparams={'lr':2e-3,
                                                     'weight_decay':1e-3}
         )
 
@@ -100,7 +100,7 @@ for (steps, gs) in test_params:
         wandb_logger = WandbLogger(project=WANDB_PROJECT_NAME,
                                 name=manufacturer_to_aug+' trained in '+manufacturer_to_aug+f'-steps{steps},gs-{gs},aug_ratio-{aug_ratio}')
                                 
-        checkpoint_callback = EarlyStopping(monitor="val/loss", patience=40, verbose=False, mode="min")
+        checkpoint_callback = EarlyStopping(monitor="val/loss", patience=25, verbose=False, mode="min")
 
         # train the model
         trainer = Trainer(max_epochs=600,
