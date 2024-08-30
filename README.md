@@ -12,6 +12,8 @@ Then run the script `build_dataset.py` to build the dataset.csv with all the ima
 
 Larger files including some pre-trained model weights, the folder containing the segmented images and some datasets containing the IAP information can be found in [here](https://zenodo.org/records/13495922) After unzipping the file the 5 folders should be moved to the root directory of the repository.
 
+A [Weights & Biases](https://wandb.ai/site) API key is needed to train and run some of the models (because of how logging metrics/plots was implemented). To get one you can create a free account on their website and then add the API key to the file `utils\constants.py`. 
+
 ## File Paths
 Paths are defined in `utils\constants.py` that may need to be changed.
 
