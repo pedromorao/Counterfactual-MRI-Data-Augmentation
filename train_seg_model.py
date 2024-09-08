@@ -33,9 +33,9 @@ WANDB_PROJECT_NAME = 'segmentation-v3'
 os.environ['CUDA_VISIBLE_DEVICES'] = CUDA_VISIBLE_DEVICES
 os.environ['WANDB_API_KEY'] = WANDB_API_KEY
 
-MANUFACTURER_TO_AUG = ['GE MEDICAL SYSTEMS']
-REFERENCE_MANUFACTURER = ['SIEMENS']
-GS = [3,5,7]
+MANUFACTURER_TO_AUG = ['SIEMENS', 'GE MEDICAL SYSTEMS']
+REFERENCE_MANUFACTURER = ['GE MEDICAL SYSTEMS', 'SIEMENS']
+GS = [2,4]
 STEPS = [25,50,75]
 aug_ratio = 1
 
@@ -82,7 +82,7 @@ for (steps, gs) in test_params:
                                                 'loss':'dice',
                                                 'include_background':True,
                                                 'weights':None, #datamodule.calc_weigths()
-                                                'aug_ratio':AUG_RATIO if datamodule.use_aug==True else None},
+                                                'aug_ratio':aug_ratio if datamodule.use_aug==True else None},
                                 unet_hprams={'spatial_dims':2,
                                             'in_channels':1,
                                             'out_channels':3,
@@ -98,7 +98,7 @@ for (steps, gs) in test_params:
 
         # initialise the wandb logger and name your wandb project
         wandb_logger = WandbLogger(project=WANDB_PROJECT_NAME,
-                                name=manufacturer_to_aug+' trained in '+manufacturer_to_aug+f'-steps{steps},gs-{gs},aug_ratio-{aug_ratio}')
+                                name=manufacturer_to_aug+' trained in '+manufacturer_to_aug+f',steps{steps},gs-{gs},aug_ratio-{aug_ratio}')
                                 
         checkpoint_callback = EarlyStopping(monitor="val/loss", patience=25, verbose=False, mode="min")
 
@@ -140,7 +140,7 @@ for (steps, gs) in test_params:
 
         # initialise the wandb logger and name your wandb project
         wandb_logger = WandbLogger(project=WANDB_PROJECT_NAME,
-                                name=reference_manufacturer+' trained in '+manufacturer_to_aug+f'-steps{steps}-gs{gs}-aug_ratio-{aug_ratio}')
+                                name=reference_manufacturer+' trained in '+manufacturer_to_aug+f',steps{steps},gs{gs},aug_ratio-{aug_ratio}')
 
         # train the model
         trainer = Trainer(logger=wandb_logger)
